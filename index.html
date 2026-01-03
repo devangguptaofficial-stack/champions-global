@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Champions.Global</title>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --gold: #bf953f;
+      --gold-light: #fcf6ba;
+      --bg: #050505;
+      --card: #111;
+    }
+
+    body {
+      background: var(--bg);
+      color: white;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+    }
+
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
+
+    .gold {
+      background: linear-gradient(135deg, #bf953f, #fcf6ba);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .card {
+      background: rgba(20,20,20,0.9);
+      border: 1px solid rgba(191,149,63,0.2);
+      border-radius: 18px;
+      padding: 24px;
+      transition: all .35s cubic-bezier(.23,1,.32,1);
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(191,149,63,.6);
+    }
+
+    .pill {
+      border: 1px solid #222;
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .15em;
+      transition: .25s;
+    }
+
+    .pill.active {
+      background: var(--gold);
+      color: black;
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- NAV -->
+<nav class="fixed top-0 w-full z-50 bg-black/80 backdrop-blur border-b border-white/10">
+  <div class="max-w-7xl mx-auto h-16 px-6 flex justify-between items-center">
+    <span class="text-xl font-black italic gold">CHAMPIONS.GLOBAL</span>
+    <div class="flex gap-8 text-xs font-bold uppercase tracking-widest">
+      <span class="text-[var(--gold)]">UFC</span>
+      <span class="opacity-60">Boxing</span>
+      <span class="opacity-60">Kickboxing</span>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="pt-32 pb-14 text-center">
+  <h1 class="text-7xl md:text-8xl font-black uppercase tracking-tight">UFC</h1>
+  <p class="mt-3 text-gray-500 tracking-[0.4em] text-xs">WORLD OFFICIAL RANKINGS</p>
+</section>
+
+<!-- WEIGHT SELECT -->
+<section class="sticky top-16 bg-black/90 border-b border-white/10 py-4">
+  <div class="flex gap-3 overflow-x-auto px-6 max-w-7xl mx-auto">
+    <span class="pill active">P4P</span>
+    <span class="pill">Flyweight</span>
+    <span class="pill">Bantamweight</span>
+    <span class="pill">Featherweight</span>
+    <span class="pill">Lightweight</span>
+    <span class="pill">Welterweight</span>
+    <span class="pill">Middleweight</span>
+    <span class="pill">Light Heavyweight</span>
+    <span class="pill">Heavyweight</span>
+  </div>
+</section>
+
+<!-- CONTENT -->
+<main class="max-w-7xl mx-auto px-6 mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pb-20">
+
+  <div class="card">
+    <p class="text-xs tracking-[0.3em] text-gray-500 mb-2">P4P CHAMPION</p>
+    <h2 class="text-2xl font-black italic gold uppercase">Islam Makhachev</h2>
+    <span class="inline-block mt-2 bg-white text-black text-[10px] px-2 py-1 rounded font-black">Champion</span>
+
+    <div class="mt-6 space-y-3">
+      <div class="flex gap-4"><span class="text-gray-600">1</span> Ilia Topuria</div>
+      <div class="flex gap-4"><span class="text-gray-600">2</span> Khamzat Chimaev</div>
+      <div class="flex gap-4"><span class="text-gray-600">3</span> Alex Pereira</div>
+      <div class="flex gap-4"><span class="text-gray-600">4</span> Volkanovski</div>
+      <div class="flex gap-4"><span class="text-gray-600">5</span> Tom Aspinall</div>
+    </div>
+  </div>
+
+</main>
+
+</body>
+</html>
