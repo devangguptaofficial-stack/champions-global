@@ -177,19 +177,30 @@
         let currentWeight = 'Pound-for-Pound';
 
         function switchSport(sport) {
-            currentSport = sport;
-            // Update Navigation UI
-            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-            document.getElementById(`nav-${sport}`).classList.add('active');
-            document.getElementById('main-title').innerText = sport.toUpperCase();
-            
-            // Default weights
-            if(sport === 'ufc') currentWeight = 'Pound-for-Pound';
-            else currentWeight = 'Heavyweight';
+    currentSport = sport;
 
-            renderWeightScroller();
-            renderContent();
-        }
+    // Remove active from all nav links
+    document.querySelectorAll('.nav-link').forEach(l => {
+        l.classList.remove('active');
+    });
+
+    // Safely add active to selected nav
+    const navBtn = document.getElementById(`nav-${sport}`);
+    if (navBtn) {
+        navBtn.classList.add('active');
+    }
+
+    document.getElementById('main-title').innerText = sport.toUpperCase();
+
+    // Set default weight per sport
+    if (sport === 'ufc') currentWeight = 'Pound-for-Pound';
+    if (sport === 'boxing') currentWeight = 'Heavyweight';
+    if (sport === 'kickboxing') currentWeight = 'Heavyweight';
+
+    renderWeightScroller();
+    renderContent();
+}
+
 
         function renderWeightScroller() {
             const container = document.getElementById('weight-scroller');
