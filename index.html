@@ -1,124 +1,276 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Champions.Global</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Champions | Combat Sports Global</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&display=swap');
+        
+        :root {
+            --gold-primary: #bf953f;
+            --gold-light: #fcf6ba;
+            --gold-dark: #aa771c;
+            --bg-black: #000000;
+        }
 
-  <!-- Tailwind -->
-  <script src="https://cdn.tailwindcss.com"></script>
+        body {
+            background-color: var(--bg-black);
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
 
-  <!-- Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&display=swap" rel="stylesheet">
+        /* Luxury Scrollbar */
+        ::-webkit-scrollbar { width: 4px; height: 4px; }
+        ::-webkit-scrollbar-track { background: #000; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
+        
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-  <style>
-    :root {
-      --gold: #bf953f;
-      --gold-light: #fcf6ba;
-      --bg: #050505;
-      --card: #111;
-    }
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #bf953f 0%, #fcf6ba 50%, #b38728 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-    body {
-      background: var(--bg);
-      color: white;
-      font-family: 'Inter', sans-serif;
-      overflow-x: hidden;
-    }
+        .glass-card {
+            background: rgba(15, 15, 15, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(191, 149, 63, 0.15);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
 
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
+        .glass-card:hover {
+            border-color: rgba(191, 149, 63, 0.4);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+        }
 
-    .gold {
-      background: linear-gradient(135deg, #bf953f, #fcf6ba);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
+        .weight-pill {
+            white-space: nowrap;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(255,255,255,0.05);
+            color: #888;
+        }
 
-    .card {
-      background: rgba(20,20,20,0.9);
-      border: 1px solid rgba(191,149,63,0.2);
-      border-radius: 18px;
-      padding: 24px;
-      transition: all .35s cubic-bezier(.23,1,.32,1);
-    }
+        .weight-pill.active {
+            background: linear-gradient(135deg, #bf953f, #aa771c);
+            color: #000;
+            border-color: transparent;
+            font-weight: 700;
+            box-shadow: 0 4px 15px rgba(191, 149, 63, 0.3);
+        }
 
-    .card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(191,149,63,.6);
-    }
+        .nav-link {
+            position: relative;
+            opacity: 0.5;
+            transition: 0.4s;
+            letter-spacing: 0.2em;
+        }
 
-    .pill {
-      border: 1px solid #222;
-      padding: 6px 14px;
-      border-radius: 999px;
-      font-size: 12px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: .15em;
-      transition: .25s;
-    }
+        .nav-link.active {
+            opacity: 1;
+            color: var(--gold-primary);
+        }
 
-    .pill.active {
-      background: var(--gold);
-      color: black;
-    }
-  </style>
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: var(--gold-primary);
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-slide-up {
+            animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+    </style>
 </head>
+<body class="pb-24">
 
-<body>
+    <!-- Top Navigation -->
+    <nav class="fixed top-0 w-full z-50 bg-black/80 backdrop-blur-2xl border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-8 h-20 flex items-center justify-between">
+            <span class="text-2xl font-black italic gold-gradient-text tracking-tighter uppercase">FIGHT.DATA</span>
+            <div class="flex gap-10 text-[10px] font-bold uppercase">
+                <button onclick="switchSport('ufc')" id="nav-ufc" class="nav-link active">UFC</button>
+                <button onclick="switchSport('boxing')" id="nav-boxing" class="nav-link">Boxing</button>
+                <button onclick="switchSport('kickboxing')" id="nav-kickboxing" class="nav-link">Kickboxing</button>
+            </div>
+        </div>
+    </nav>
 
-<!-- NAV -->
-<nav class="fixed top-0 w-full z-50 bg-black/80 backdrop-blur border-b border-white/10">
-  <div class="max-w-7xl mx-auto h-16 px-6 flex justify-between items-center">
-    <span class="text-xl font-black italic gold">CHAMPIONS.GLOBAL</span>
-    <div class="flex gap-8 text-xs font-bold uppercase tracking-widest">
-      <span class="text-[var(--gold)]">UFC</span>
-      <span class="opacity-60">Boxing</span>
-      <span class="opacity-60">Kickboxing</span>
+    <!-- Hero Header -->
+    <header class="pt-40 pb-16 text-center">
+        <h1 id="main-title" class="text-7xl md:text-9xl font-black uppercase tracking-tighter gold-gradient-text animate-slide-up italic">UFC</h1>
+        <p class="text-gray-500 text-[10px] tracking-[0.6em] uppercase mt-4 animate-slide-up" style="animation-delay: 0.1s">World Championship Rankings</p>
+    </header>
+
+    <!-- Weight Class Scroller -->
+    <div class="sticky top-20 z-40 bg-black/95 border-b border-white/5 py-6">
+        <div id="weight-scroller" class="max-w-7xl mx-auto px-8 flex gap-4 overflow-x-auto no-scrollbar">
+            <!-- Populated via JS -->
+        </div>
     </div>
-  </div>
-</nav>
 
-<!-- HERO -->
-<section class="pt-32 pb-14 text-center">
-  <h1 class="text-7xl md:text-8xl font-black uppercase tracking-tight">UFC</h1>
-  <p class="mt-3 text-gray-500 tracking-[0.4em] text-xs">WORLD OFFICIAL RANKINGS</p>
-</section>
+    <!-- Main Content Grid -->
+    <main class="max-w-7xl mx-auto px-8 mt-16">
+        <div id="content-area" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Rankings Cards appear here -->
+        </div>
+    </main>
 
-<!-- WEIGHT SELECT -->
-<section class="sticky top-16 bg-black/90 border-b border-white/10 py-4">
-  <div class="flex gap-3 overflow-x-auto px-6 max-w-7xl mx-auto">
-    <span class="pill active">P4P</span>
-    <span class="pill">Flyweight</span>
-    <span class="pill">Bantamweight</span>
-    <span class="pill">Featherweight</span>
-    <span class="pill">Lightweight</span>
-    <span class="pill">Welterweight</span>
-    <span class="pill">Middleweight</span>
-    <span class="pill">Light Heavyweight</span>
-    <span class="pill">Heavyweight</span>
-  </div>
-</section>
+    <script>
+        const ufcData = {
+            "Pound-for-Pound": { champion: "Islam Makhachev", contenders: ["Islam Makhachev", "Ilia Topuria", "Khamzat Chimaev", "Alex Pereira", "Alexander Volkanovski", "Petr Yan", "Merab Dvalishvili", "Tom Aspinall", "Alexandre Pantoja", "Max Holloway", "Dricus Du Plessis", "Joshua Van", "Magomed Ankalaev", "Jack Della Maddalena", "Arman Tsarukyan"] },
+            "Flyweight": { champion: "Joshua Van", contenders: ["Alexandre Pantoja", "Manel Kape", "Tatsuro Taira", "Brandon Royval", "Brandon Moreno", "Amir Albazi", "Asu Almabayev", "Kyoji Horiguchi", "Tim Elliott", "Steve Erceg", "Alex Perez", "Tagir Ulanbekov", "Charles Johnson", "Bruno Silva", "Lone’er Kavanagh"] },
+            "Bantamweight": { champion: "Petr Yan", contenders: ["Merab Dvalishvili", "Umar Nurmagomedov", "Sean O'Malley", "Cory Sandhagen", "Song Yadong", "Deiveson Figueiredo", "Aiemann Zahabi", "Marlon Vera", "Mario Bautista", "David Martinez", "Payton Talbott", "Rob Font", "Vinicius Oliveira", "Kyler Phillips", "Montel Jackson"] },
+            "Featherweight": { champion: "Alexander Volkanovski", contenders: ["Movsar Evloev", "Diego Lopes", "Yair Rodriguez", "Lerone Murphy", "Aljamain Sterling", "Arnold Allen", "Youssef Zalal", "Steve Garcia", "Brian Ortega", "Jean Silva", "Josh Emmett", "Patricio Pitbull", "Kevin Vallejos", "Dan Ige", "David Onama"] },
+            "Lightweight": { champion: "Ilia Topuria", contenders: ["Arman Tsarukyan", "Charles Oliveira", "Max Holloway", "Justin Gaethje", "Paddy Pimblett", "Dan Hooker", "Mateusz Gamrot", "Benoît Saint Denis", "Rafael Fiziev", "Renato Moicano", "Beneil Dariush", "Michael Chandler", "Manuel Torres", "Mauricio Ruffy", "Farès Ziam"] },
+            "Welterweight": { champion: "Islam Makhachev", contenders: ["Jack Della Maddalena", "Shavkat Rakhmonov", "Ian Machado Garry", "Michael Morales", "Belal Muhammad", "Carlos Prates", "Sean Brady", "Kamaru Usman", "Leon Edwards", "Joaquin Buckley", "Gabriel Bonfim", "Gilbert Burns", "Geoff Neal", "Colby Covington", "Daniel Rodriguez"] },
+            "Middleweight": { champion: "Khamzat Chimaev", contenders: ["Dricus Du Plessis", "Nassourdine Imavov", "Sean Strickland", "Anthony Hernandez", "Brendan Allen", "Israel Adesanya", "Caio Borralho", "Reinier de Ridder", "Robert Whittaker", "Jared Cannonier", "Michael Page", "Roman Dolidze", "Paulo Costa", "Gregory Rodrigues", "Joe Pyfer"] },
+            "Light Heavyweight": { champion: "Alex Pereira", contenders: ["Magomed Ankalaev", "Jiří Procházka", "Carlos Ulberg", "Khalil Rountree Jr.", "Jan Błachowicz", "Azamat Murzakanov", "Jamahal Hill", "Volkan Oezdemir", "Dominick Reyes", "Bogdan Guskov", "Aleksandar Rakić", "Johnny Walker", "Nikita Krylov", "Zhang Mingyang", "Alonzo Menifield"] },
+            "Heavyweight": { champion: "Tom Aspinall", contenders: ["Ciryl Gane", "Alexander Volkov", "Sergei Pavlovich", "Curtis Blaydes", "Waldo Cortes Acosta", "Jailton Almeida", "Serghei Spivac", "Derrick Lewis", "Ante Delija", "Marcin Tybura", "Shamil Gaziev", "Tai Tuivasa", "Mick Parkin", "Valter Walker", "Tallison Teixeira"] }
+        };
 
-<!-- CONTENT -->
-<main class="max-w-7xl mx-auto px-6 mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pb-20">
+        const boxingData = {
+            "Heavyweight": {
+                IBF: { champ: "Oleksandr Usyk", list: ["Derek Chisora", "Frank Sanchez", "Richard Torrez Jr.", "Jared Anderson", "Martin Bakole", "Bakhodir Jalolov", "Guido Vianello", "Richard Riakporhe", "Lawrence Okolie", "Michael Hunter", "Daniel Dubois", "Filip Hrgovic", "Moses Itauma", "Efe Ajagba"]},
+                WBA: { champ: "Oleksandr Usyk", list: ["Murat Gassiev (Reg)", "Moses Itauma", "Lenier Pero", "Martin Bakole", "Nelson Hysa", "Filip Hrgovic", "Arslanbek Makhmudov", "Dainier Pero", "Gurgen Hovhannisyan", "Kem Ljungquist", "Kubrat Pulev", "Michael Hunter", "Artem Suslenkov", "Justis Huni", "Joseph Goodall"]},
+                WBC: { champ: "Oleksandr Usyk", list: ["Agit Kabayel (Int)", "Lawrence Okolie", "Daniel Dubois", "Anthony Joshua", "Moses Itauma", "Filip Hrgovic", "Efe Ajagba", "Martin Bakole", "Richard Torrez Jr.", "Frank Sanchez", "Zhilei Zhang", "Bakhodir Jalolov", "Guido Vianello", "Deontay Wilder", "Derek Chisora"]},
+                WBO: { champ: "Fabio Wardley", list: ["Moses Itauma", "Filip Hrgovic", "Zhilei Zhang", "Daniel Dubois", "Jared Anderson", "Derek Chisora", "Nelson Hysa", "Bakhodir Jalolov", "Richard Torrez Jr.", "Anthony Joshua", "Jermaine Franklin", "Richard Riakporhe", "Efe Ajagba", "Solomon Dacres", "Gustavo Trujillo"]}
+            },
+            "Cruiserweight": {
+                IBF: { champ: "Jai Opetaia", list: ["Huseyin Cinkara", "Chris Billam-Smith", "Mateusz Masternak", "Roman Fress", "Leonardo Mosquea", "David Nyika", "Floyd Masson", "Viddal Riley", "Juergen Uldedaj", "Mike Perez", "Lenar Perez", "Tristan Kalkreuth", "Pat Brown", "Brandon Glanton"]},
+                WBA: { champ: "Gilberto Ramirez", list: ["Leonardo Mosquea", "Lenar Perez", "Aloys Youmbi", "Mike Perez", "Yuniel Dorticos", "Aleksei Egorov", "Chris Billam-Smith", "Aleksei Papin", "Robin Sirwan Safar", "Roman Fress", "Giovanni Scuderi", "Pat Brown", "Liam Callanan", "Edin Puhalo"]},
+                WBC: { champ: "Noel Mikaelyan", list: ["Michael Cieslak (Int)", "Ryan Rozicki", "Yamil Peralta", "Chris Billam-Smith", "Mateusz Masternak", "Ilunga Makabu", "Brandon Glanton", "Leonardo Mosquea", "Roman Fress", "Yuniel Dorticos", "Viddal Riley", "Kevin Ramirez", "Aloys Youmbi", "Floyd Masson", "Mike Perez"]},
+                WBO: { champ: "Gilberto Ramirez", list: ["Roman Fress", "Umar Salamov", "Tahir Kahrovic", "Robin Sirwan Safar", "Chris Billam-Smith", "Mike Perez", "Mateusz Masternak", "David Nyika", "Leonardo Mosquea", "Armend Xhoxhaj", "Brandon Glanton", "Yuniel Dorticos", "Aloys Youmbi", "Floyd Masson", "Viddal Riley"]}
+            },
+            "Light Heavyweight": {
+                IBF: { champ: "Dmitry Bivol", list: ["Michael Eifert", "Conor Wallace", "Artur Beterbiev", "David Morrell", "Malik Zinad", "Ali Ismailov", "Imam Khataev", "Vasyli Voytsekhovsky", "Juan Carrillo", "Ben Whittaker", "Sharabutdin Ataev", "Daniel Lapin", "Najee Lopez", "Joshua Buatsi", "Atif Oberlton"]},
+                WBA: { champ: "Dmitry Bivol", list: ["David Benavidez (Reg)", "Albert Ramirez (Int)", "Artur Beterbiev", "Arlen Lopez", "Sharabutdin Ataev", "Daniel Lapin", "Atif Oberlton", "Deon Nicholson", "Najee Lopez", "Anthony Yarde", "Ezra Taylor", "Lerrone Richards", "Conor Wallace", "Joshua Buatsi", "Liam Cameron"]},
+                WBC: { champ: "David Benavidez", list: ["Artur Beterbiev", "Joshua Buatsi", "Ben Whittaker", "David Morrell", "Oleksandr Gvozdyk", "Imam Khataev", "Willy Hutchinson", "Zach Parker", "Mehmet Nadir Unal", "Conor Wallace", "Anthony Yarde", "Craig Richards", "Arlen Lopez", "Khalil Coe", "Najee Lopez"]},
+                WBO: { champ: "Dmitry Bivol", list: ["Callum Smith (Int)", "Artur Beterbiev", "David Morrell", "Joshua Buatsi", "Oleksandr Gvozdyk", "Conor Wallace", "Ardian Krasniqi", "Artur Reis", "Alban Bermeta", "Zach Parker", "Daniel Lapin", "Maxim Xu", "Ben Whittaker", "Juan Carrillo", "Diyab Dabschah"]}
+            }
+        };
 
-  <div class="card">
-    <p class="text-xs tracking-[0.3em] text-gray-500 mb-2">P4P CHAMPION</p>
-    <h2 class="text-2xl font-black italic gold uppercase">Islam Makhachev</h2>
-    <span class="inline-block mt-2 bg-white text-black text-[10px] px-2 py-1 rounded font-black">Champion</span>
+        const kickboxingData = {
+            "Heavyweight": { champion: "Rico Verhoeven", contenders: ["Levi Rigters", "Tariq Osaro", "Bahram Rajabzadeh", "Uku Jurjendal", "Benjamin Adegbuyi", "Nabil Khachab", "Sofian Laidouni", "Nordine Mahieddine", "Cihad Kepenek", "Enver Sljivar"] },
+            "Light Heavyweight": { champion: "Tarik Khbabez", contenders: ["Donegi Abena", "Stefan Latescu", "Sergej Maslobojev", "Ibrahim El Bouni", "Felipe Micheletti", "Bogdan Stoica", "Luis Tavares", "Milos Bajovic"] },
+            "Middleweight": { champion: "Donovan Wisse", contenders: ["Michael Boapeah", "Ulric Bokeme", "Serkan Ozcaglayan", "Ertugrul Bayrak", "Juri De Sousa"] }
+        };
 
-    <div class="mt-6 space-y-3">
-      <div class="flex gap-4"><span class="text-gray-600">1</span> Ilia Topuria</div>
-      <div class="flex gap-4"><span class="text-gray-600">2</span> Khamzat Chimaev</div>
-      <div class="flex gap-4"><span class="text-gray-600">3</span> Alex Pereira</div>
-      <div class="flex gap-4"><span class="text-gray-600">4</span> Volkanovski</div>
-      <div class="flex gap-4"><span class="text-gray-600">5</span> Tom Aspinall</div>
-    </div>
-  </div>
+        let currentSport = 'ufc';
+        let currentWeight = 'Pound-for-Pound';
 
-</main>
+        function switchSport(sport) {
+            currentSport = sport;
+            // Update Navigation UI
+            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+            document.getElementById(`nav-${sport}`).classList.add('active');
+            document.getElementById('main-title').innerText = sport.toUpperCase();
+            
+            // Default weights
+            if(sport === 'ufc') currentWeight = 'Pound-for-Pound';
+            else currentWeight = 'Heavyweight';
 
+            renderWeightScroller();
+            renderContent();
+        }
+
+        function renderWeightScroller() {
+            const container = document.getElementById('weight-scroller');
+            container.innerHTML = '';
+            let weights = [];
+            
+            if(currentSport === 'ufc') weights = Object.keys(ufcData);
+            else if(currentSport === 'boxing') weights = Object.keys(boxingData);
+            else weights = Object.keys(kickboxingData);
+
+            weights.forEach(w => {
+                const btn = document.createElement('button');
+                btn.className = `weight-pill px-6 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest ${currentWeight === w ? 'active' : ''}`;
+                btn.innerText = w;
+                btn.onclick = () => {
+                    currentWeight = w;
+                    renderWeightScroller();
+                    renderContent();
+                };
+                container.appendChild(btn);
+            });
+        }
+
+        function renderContent() {
+            const container = document.getElementById('content-area');
+            container.innerHTML = '';
+            
+            if (currentSport === 'ufc') {
+                container.className = "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8";
+                const data = ufcData[currentWeight];
+                renderCard(currentWeight, data.champion, data.contenders);
+            } 
+            else if (currentSport === 'boxing') {
+                container.className = "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8";
+                const data = boxingData[currentWeight];
+                ['IBF', 'WBA', 'WBC', 'WBO'].forEach(belt => {
+                    if(data[belt]) renderCard(belt, data[belt].champ, data[belt].list);
+                });
+            }
+            else {
+                container.className = "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8";
+                const data = kickboxingData[currentWeight];
+                renderCard(currentWeight, data.champion, data.contenders);
+            }
+        }
+
+        function renderCard(title, champ, list) {
+            const container = document.getElementById('content-area');
+            const card = document.createElement('div');
+            card.className = "glass-card rounded-3xl p-8 animate-slide-up";
+            
+            let html = `
+                <div class="mb-10">
+                    <h3 class="text-[9px] uppercase tracking-[0.4em] text-gray-500 font-black mb-3">${title}</h3>
+                    <h2 class="text-2xl font-black italic gold-gradient-text uppercase tracking-tighter leading-none">${champ}</h2>
+                    <div class="mt-4 inline-flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-gold-primary animate-pulse"></span>
+                        <span class="text-[8px] text-gold-primary font-black uppercase tracking-widest">World Champion</span>
+                    </div>
+                </div>
+                <div class="space-y-4">
+            `;
+
+            list.forEach((name, idx) => {
+                html += `
+                    <div class="flex items-center gap-5 group">
+                        <span class="text-[10px] font-black text-gray-800 w-4 group-hover:text-gold-dark transition-colors">${idx + 1}</span>
+                        <div class="flex-1 border-b border-white/[0.03] pb-3 group-hover:border-gold-primary/30 transition-all">
+                            <span class="text-xs font-semibold text-gray-400 group-hover:text-white transition-colors">${name}</span>
+                        </div>
+                    </div>
+                `;
+            });
+
+            html += `</div>`;
+            card.innerHTML = html;
+            container.appendChild(card);
+        }
+
+        window.onload = () => switchSport('ufc');
+    </script>
 </body>
 </html>
+
