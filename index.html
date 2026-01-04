@@ -213,7 +213,7 @@
 
             weights.forEach(w => {
                 const btn = document.createElement('button');
-                btn.className = `weight-pill px-6 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest ${currentWeight === w ? 'active' : ''}`;
+                btn.className = `weight-pill px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider ${currentWeight === w ? 'active' : ''}`;
                 btn.innerText = w;
                 btn.onclick = () => {
                     currentWeight = w;
@@ -252,17 +252,16 @@
             const card = document.createElement('div');
             card.className = "glass-card rounded-3xl p-8 animate-slide-up";
             
-            let html = `
-                <div class="mb-10">
-                    <h3 class="text-[9px] uppercase tracking-[0.4em] text-gray-500 font-black mb-3">${title}</h3>
-                    <h2 class="text-2xl font-black italic gold-gradient-text uppercase tracking-tighter leading-none">${champ}</h2>
-                    <div class="mt-4 inline-flex items-center gap-2">
-                        <span class="w-2 h-2 rounded-full bg-gold-primary animate-pulse"></span>
-                        <span class="text-[8px] text-gold-primary font-black uppercase tracking-widest">World Champion</span>
-                    </div>
-                </div>
-                <div class="space-y-4">
-            `;
+         let html = `
+    <div class="flex justify-between items-start mb-6">
+        <div>
+            <h3 class="text-[10px] uppercase tracking-[0.3em] text-gray-500 font-bold mb-1">${title}</h3>
+            <h2 class="text-xl font-black premium-gradient italic uppercase">${champ}</h2>
+            <span class="text-[9px] bg-white text-black px-2 py-0.5 rounded font-black uppercase mt-2 inline-block">Champion</span>
+        </div>
+    </div>
+    <div class="space-y-3">
+`;
 
             list.forEach((name, idx) => {
                 html += `
@@ -284,4 +283,5 @@
     </script>
 </body>
 </html>
+
 
